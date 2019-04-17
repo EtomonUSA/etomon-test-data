@@ -1,0 +1,30 @@
+{
+  "name": "@dailynodemodule/emperor-data",
+  "version": "1.0.1",
+  "description": "Data on emperors of the Holy Roman Empire for use as sample data in other projects",
+  "main": "src/index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dailynodemodule/emperor-data"
+  },
+  "scripts": {
+    "build": "node src/build.js",
+    "prepublish": "npm run build"
+  },
+  "author": "Zachary Boyd <zachary@dailynodemodule.com>",
+  "license": "CC0-1.0",
+  "devDependencies": {
+    "cheerio": "^1.0.0-rc.3",
+    "fs-extra": "^7.0.1",
+    "lodash": "^4.17.11",
+    "request": "^2.88.0",
+    "request-promise-native": "^1.0.7"
+  },
+  "files": [
+    "src/index.js",
+    "data/emperors.json",
+    "LICENSE.txt",
+    ".gitignore",
+    "README.md"
+  ]
+}
