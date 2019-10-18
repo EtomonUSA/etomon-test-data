@@ -39,6 +39,16 @@ const outputFile = path.join(__dirname, '..', 'data', 'emperors.json');
         })
     );
 
+    for (const emp of data) {
+        const image = await request({
+            url: emp.imageUrl,
+            encoding: null,
+            transform: null
+        });
+
+        emp.image = Buffer.from(image).toString('base64');
+    }
+
     await fs.ensureFile(outputFile);
     await fs.writeFile(outputFile, JSON.stringify(data, null, 4));
 })();
