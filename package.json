@@ -23,6 +23,7 @@
   "files": [
     "src/index.js",
     "data/emperors.json",
+    "data/states.json",
     "LICENSE.txt",
     ".gitignore",
     "README.md"
