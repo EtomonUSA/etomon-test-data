@@ -60,7 +60,8 @@ async function mainLoop(letter = 'A', states = []) {
         console.log(`Grabbing states in ${letter}`)
         let $ = await request({
             url: `https://en.wikipedia.org/wiki/List_of_states_in_the_Holy_Roman_Empire_(${letter})`,
-            transform: cheerio.load
+            transform: cheerio.load,
+            timeout: 1000
         });
         
         const statesInLetter = Array.from($('.wikitable tbody tr'));
