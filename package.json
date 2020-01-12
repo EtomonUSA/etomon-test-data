@@ -1,6 +1,6 @@
 {
   "name": "@dailynodemodule/emperor-data",
-  "version": "1.1.0",
+  "version": "2.0.0",
   "description": "Data on emperors of the Holy Roman Empire for use as sample data in other projects",
   "main": "src/index.js",
   "repository": {
@@ -9,7 +9,9 @@
   },
   "scripts": {
     "build": "node src/build.js",
-    "prepublish": "npm run build"
+    "install": "node src/install.js",
+    "prepublish": "npm run build",
+    "postinstall": "npm run install"
   },
   "author": "Zachary Boyd <zachary@dailynodemodule.com>",
   "license": "CC0-1.0",
@@ -18,14 +20,20 @@
     "fs-extra": "^7.0.1",
     "lodash": "^4.17.11",
     "request": "^2.88.0",
-    "request-promise-native": "^1.0.7"
+    "request-promise-native": "^1.0.7",
+    "xxhash": "^0.3.0"
   },
   "files": [
     "src/index.js",
-    "data/emperors.json",
-    "data/states.json",
+    "data/emperors/*.xz",
+    "data/states/*.xz",
     "LICENSE.txt",
     ".gitignore",
     "README.md"
-  ]
+  ],
+  "dependencies": {
+    "bson-ext": "^2.0.3",
+    "lzma-native": "^6.0.0",
+    "sharp": "^0.23.4"
+  }
 }
