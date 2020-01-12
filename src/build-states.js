@@ -94,7 +94,7 @@ async function mainLoop(letter = 'A', states = []) {
                 if (!state.name || !url)    
                     continue;
 
-                if (await fs.pathExists(getStatePath(state)) || await fs.pathExists(getStatePath(emp)+'.xz')) {
+                if (await fs.pathExists(getStatePath(state)) || await fs.pathExists(getStatePath(state)+'.xz')) {
                     console.log(`${state.name} already downloaded...`);
                     continue;
                 }
