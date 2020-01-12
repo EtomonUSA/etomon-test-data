@@ -89,7 +89,7 @@ module.exports = async () => {
     );
 
     for (const emp of data) {
-        if (await fs.pathExists(getEmpPath(emp))) {
+        if (await fs.pathExists(getEmpPath(emp)) || await fs.pathExists(getEmpPath(emp)+'.xz')) {
             console.log(`${emp.name} already downloaded...`);
             continue;
         }
