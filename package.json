@@ -21,7 +21,8 @@
     "lodash": "^4.17.15",
     "request": "^2.88.0",
     "request-promise-native": "^1.0.7",
-    "xxhash": "^0.3.0"
+    "xxhash": "^0.3.0",
+    "sharp": "^0.23.4"
   },
   "files": [
     "src/index.js",
@@ -33,7 +34,6 @@
   ],
   "dependencies": {
     "bson-ext": "^2.0.3",
-    "lzma-native": "^6.0.0",
-    "sharp": "^0.23.4"
+    "lzma-native": "^6.0.0"
   }
 }
