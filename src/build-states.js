@@ -54,7 +54,8 @@ async function getStateImage(state) {
     return state;
 }
 
-async function mainLoop(letter = 'A', states = [], lastIndex = 0) {
+async function mainLoop(letter = 'A', states = [], lastId = 0) {
+    let i;
     try {
         console.log(`Grabbing states in ${letter}`)
         let $ = await request({
@@ -66,9 +67,7 @@ async function mainLoop(letter = 'A', states = [], lastIndex = 0) {
         const statesInLetter = Array.from($('.wikitable tbody tr')).slice(1);
 
         let newStates = [];
-        let lastIndex;
-        for (let i = lastIndex; i < statesInLetter.length; i++) {
-            lastIndex = i;
+        for (i = 0; i < statesInLetter.length; i++) {
             try {
                 const stateEle = statesInLetter[i];
                 const col = Array.from($('td', stateEle));
@@ -120,7 +119,7 @@ async function mainLoop(letter = 'A', states = [], lastIndex = 0) {
     const letterCode = letter.charCodeAt(0) + 1;
     const nextLetter = String.fromCharCode(letterCode); 
     if (letterCode < 91) {
-        return mainLoop(nextLetter, states, lastIndex);
+        return mainLoop(nextLetter, states, lastId+i);
     } else {
         return states;
     }
