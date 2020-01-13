@@ -13,6 +13,7 @@ const states = fs.pathExistsSync(statesDir) ? fs.readdirSync(statesDir).filter(f
 function createDataProxy(data) {
     const dataProxy = new Proxy(data, {
         set: () => false,
+        deleteProperty: () => false,
         has: function (target, prop) {
             if ((typeof(prop) !== 'number' && typeof(prop) !== 'string') && !Number.isInteger(Number(prop)))
                 return void(0);
