@@ -24,8 +24,13 @@ async function getStatePage(state) {
     $('sup.reference').remove();
     const text = $('#mw-content-text p').text();
     state.text = text.trim();
+    const relImg = $('.infobox a.image img[data-file-width]').parents('a').first().attr('href');
 
-    const imagePage = 'https://en.wikipedia.org'+$('.infobox a.image img[data-file-width]').parents('a').first().attr('href');
+    if (!relImg) {
+        throw new Error(`State ${state.name} has no image`);
+    }
+
+    const imagePage = 'https://en.wikipedia.org'+relImg;
 
     $ = await request({
         url: imagePage,
