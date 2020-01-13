@@ -62,7 +62,12 @@ module.exports = async () => {
 
     const data = flatten(
         $('.mw-parser-output h4').get().map((h4, index) => {
-            const house = $('.mw-headline', h4).text();
+            let house = $('.mw-headline', h4).text();
+                            
+            if  (house.indexOf(': ') !== -1) {
+                house = house.split(': ').pop();
+            }
+
             const emperors = $('tr', $(h4).nextAll('table').first()).get().slice(1);
 
             return emperors.map((emperor) => {
@@ -73,6 +78,7 @@ module.exports = async () => {
                 const reignText = $('small', nameElement).text().trim().replace(/\(/g, '').replace(/\)/g, '');
                 const reignStart = Number(reignText.split('–').shift());
                 const reignEnd = Number(reignText.split('–').pop());
+                
 
                 const id = xxhash.hash(Buffer.from(url, 'utf8'), 7367);
                 return {
