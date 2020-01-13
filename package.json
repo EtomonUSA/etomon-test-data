@@ -17,7 +17,6 @@
   "license": "CC0-1.0",
   "devDependencies": {
     "cheerio": "^1.0.0-rc.3",
-    "fs-extra": "^7.0.1",
     "xxhash": "^0.3.0",
     "lodash": "^4.17.15",
     "request": "^2.88.0",
@@ -35,6 +34,7 @@
   ],
   "dependencies": {
     "bson-ext": "^2.0.3",
-    "lzma-native": "^6.0.0"
+    "lzma-native": "^6.0.0",
+    "fs-extra": "^7.0.1"
   }
 }
