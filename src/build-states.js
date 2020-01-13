@@ -1,4 +1,5 @@
 const path = require('path'); 
+const xxhash = require('xxhash');
 const cheerio = require('cheerio');
 const request = require('request-promise-native');
 const lzma = require('lzma-native');
@@ -54,8 +55,7 @@ async function getStateImage(state) {
     return state;
 }
 
-async function mainLoop(letter = 'A', states = [], lastId = 0) {
-    let i;
+async function mainLoop(letter = 'A', states = []) {
     try {
         console.log(`Grabbing states in ${letter}`)
         let $ = await request({
@@ -64,16 +64,16 @@ async function mainLoop(letter = 'A', states = [], lastId = 0) {
             timeout: 5000
         });
         
-        const statesInLetter = Array.from($('.wikitable tbody tr')).slice(1);
+        const statesInLetter = Array.from($('.wikitable tbody tr'));
 
         let newStates = [];
-        for (i = 0; i < statesInLetter.length; i++) {
+        for (const stateEle of statesInLetter.slice(1)) {
             try {
-                const stateEle = statesInLetter[i];
                 const col = Array.from($('td', stateEle));
 
                 const titleAnchor = $('a:last-child:not(.new)', col[0]);
                 const url = `https://en.wikipedia.org`+titleAnchor.attr('href');
+                const id = xxhash.hash(Buffer.from(url, 'utf8'), 7367);
 
                 const name = titleAnchor.text();
                 const type = $(col[1]).text().trim();
@@ -82,7 +82,7 @@ async function mainLoop(letter = 'A', states = [], lastId = 0) {
                 const founded = Number(($(col[4]).text().trim()).replace(/[^0-9.]/ig, '')) || void(0);
                 
                 const state = {
-                    id: i,
+                    id,
                     name,
                     url,
                     type,
@@ -119,7 +119,7 @@ async function mainLoop(letter = 'A', states = [], lastId = 0) {
     const letterCode = letter.charCodeAt(0) + 1;
     const nextLetter = String.fromCharCode(letterCode); 
     if (letterCode < 91) {
-        return mainLoop(nextLetter, states, lastId+i);
+        return mainLoop(nextLetter, states);
     } else {
         return states;
     }

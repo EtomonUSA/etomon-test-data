@@ -1,4 +1,5 @@
 const path = require('path'); 
+const xxhash = require('xxhash');
 const cheerio = require('cheerio');
 const request = require('request-promise-native');
 const lzma = require('lzma-native');
@@ -60,7 +61,7 @@ module.exports = async () => {
     $('table[cellpadding="4"]').remove();
 
     const data = flatten(
-        $('.mw-parser-output h4').get().map((h4) => {
+        $('.mw-parser-output h4').get().map((h4, index) => {
             const house = $('.mw-headline', h4).text();
             const emperors = $('tr', $(h4).nextAll('table').first()).get().slice(1);
 
@@ -73,7 +74,10 @@ module.exports = async () => {
                 const reignStart = Number(reignText.split('–').shift());
                 const reignEnd = Number(reignText.split('–').pop());
 
+                const id = xxhash.hash(Buffer.from(url, 'utf8'), 7367);
                 return {
+                    index,
+                    id,
                     house,
                     name,
                     url,
@@ -84,9 +88,7 @@ module.exports = async () => {
         })
     );
 
-    for (let i = 0; i < data.length; i++) {
-        const emp = data[i];
-        emp.id = i;
+    for (const emp of data) {
         if (await fs.pathExists(getEmpPath(emp)) || await fs.pathExists(getEmpPath(emp)+'.xz')) {
             console.log(`${emp.name} already downloaded...`);
             continue;
