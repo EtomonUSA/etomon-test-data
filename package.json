@@ -9,9 +9,9 @@
   },
   "scripts": {
     "build": "node src/build.js",
-    "install": "node src/install.js",
-    "prepublish": "npm run build",
-    "postinstall": "npm run install"
+    "decompress": "node src/install.js",
+    "prepublishOnly": "npm run build",
+    "postinstall": "npm run decompress"
   },
   "author": "Zachary Boyd <zachary@dailynodemodule.com>",
   "license": "CC0-1.0",
@@ -21,7 +21,6 @@
     "lodash": "^4.17.15",
     "request": "^2.88.0",
     "request-promise-native": "^1.0.7",
-    "xxhash": "^0.3.0",
     "sharp": "^0.23.4"
   },
   "files": [

@@ -10,14 +10,13 @@ const emperors = fs.pathExistsSync(empDir) ? fs.readdirSync(empDir).filter(f => 
 const states = fs.pathExistsSync(statesDir) ? fs.readdirSync(statesDir).filter(f => f.indexOf('.bson.xz') !== -1).map(f => path.join(statesDir, f)) : [];
 
 async function main() {
+    console.log(`decompressing emperor data...`);
     for (const filePath of (emperors.concat(states))) {
         const buf = await lzma.decompress(await fs.readFile(filePath));
-        console.log(`decompressing ${filePath}...`);
         await fs.writeFile(filePath.replace('.xz', ''), buf);
         await fs.remove(filePath);
-
-        console.log(`wrote ${filePath.replace('.xz', '')}...`);
     }
+    console.log(`decompressed emperor data...`);
 }
 
 main().then(() => process.exit(0)).catch(err => { console.error(err.stack); process.exit(1); })

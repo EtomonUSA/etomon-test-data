@@ -14,7 +14,7 @@ To build run `npm run build`. Output will be saved to the `data` folder. The out
 
 # Installing
 
-Once built, you can decompress the BSON files with `npm run install`.
+Once built, you can decompress the BSON files with `npm run decompress`.
 
 # Using
 

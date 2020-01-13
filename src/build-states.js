@@ -1,5 +1,4 @@
 const path = require('path'); 
-const xxhash = require('xxhash');
 const cheerio = require('cheerio');
 const request = require('request-promise-native');
 const lzma = require('lzma-native');
@@ -64,16 +63,16 @@ async function mainLoop(letter = 'A', states = []) {
             timeout: 5000
         });
         
-        const statesInLetter = Array.from($('.wikitable tbody tr'));
+        const statesInLetter = Array.from($('.wikitable tbody tr')).slice(1);
 
         let newStates = [];
-        for (const stateEle of statesInLetter.slice(1)) {
+        for (let i = 0; i < statesInLetter.length; i++) {
             try {
+                const stateEle = statesInLetter[i];
                 const col = Array.from($('td', stateEle));
 
                 const titleAnchor = $('a:last-child:not(.new)', col[0]);
                 const url = `https://en.wikipedia.org`+titleAnchor.attr('href');
-                const id = xxhash.hash(Buffer.from(url, 'utf8'), 7367);
 
                 const name = titleAnchor.text();
                 const type = $(col[1]).text().trim();
@@ -82,7 +81,7 @@ async function mainLoop(letter = 'A', states = []) {
                 const founded = Number(($(col[4]).text().trim()).replace(/[^0-9.]/ig, '')) || void(0);
                 
                 const state = {
-                    id,
+                    id: i,
                     name,
                     url,
                     type,

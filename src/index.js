@@ -55,4 +55,4 @@ const mod = {
 
 Object.freeze(mod);
 
-return mod;
+module.exports = mod;
