@@ -1,6 +1,6 @@
 {
   "name": "@dailynodemodule/emperor-data",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "Data on emperors of the Holy Roman Empire for use as sample data in other projects",
   "main": "src/index.js",
   "repository": {
@@ -26,6 +26,7 @@
   },
   "files": [
     "src/index.js",
+    "src/install.js",
     "data/emperors/*.xz",
     "data/states/*.xz",
     "LICENSE.txt",
