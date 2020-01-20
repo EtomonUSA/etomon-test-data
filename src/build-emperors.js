@@ -60,7 +60,7 @@ module.exports = async () => {
     $('table[cellpadding="4"]').remove();
 
     const data = flatten(
-        $('.mw-parser-output h4').get().slice(1, 2).map((h4, index) => {
+        $('.mw-parser-output h4').get().map((h4, index) => {
             let house = $('.mw-headline', h4).text();
                             
             if  (house.indexOf(': ') !== -1) {
@@ -101,8 +101,15 @@ module.exports = async () => {
         
         await getTextAndImageUrl(emp);
         await getImage(emp);
-        const buf = await lzma.compress(msgpack.encode(emp), 9);
-        await fs.ensureFile(getEmpPath(emp)+'.xz');
-        await fs.writeFile(getEmpPath(emp)+'.xz', buf);
+
+        let buf = msgpack.encode(emp);
+        if (!process.env.NO_COMPRESS) {
+            buf = await lzma.compress(buf, 9);
+            await fs.ensureFile(getEmpPath(emp)+'.xz');
+            await fs.writeFile(getEmpPath(emp)+'.xz', buf);
+        } else {
+            await fs.ensureFile(getEmpPath(emp));
+            await fs.writeFile(getEmpPath(emp), buf);
+        }
     } 
 };

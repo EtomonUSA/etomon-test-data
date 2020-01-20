@@ -107,9 +107,15 @@ async function mainLoop(letter = 'A', states = []) {
                 await getStatePage(state);
                 await getStateImage(state);
 
-                const buf = await lzma.compress(msgpack.encode(state), 9);
-                await fs.ensureFile(getStatePath(state)+'.xz');
-                await fs.writeFile(getStatePath(state)+'.xz', buf);
+                let buf = msgpack.encode(state);
+                if (!process.env.NO_COMPRESS) {
+                    buf = await lzma.compress(buf, 9);
+                    await fs.ensureFile(getStatePath(state)+'.xz');
+                    await fs.writeFile(getStatePath(state)+'.xz', buf);
+                } else {
+                    await fs.ensureFile(getStatePath(state));
+                    await fs.writeFile(getStatePath(state), buf);
+                }
             } catch (e) {
                 console.error(`Error in ${letter}: `+e.message);
                 continue;
