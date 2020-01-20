@@ -6,12 +6,11 @@ const lzma = require('lzma-native');
 const fs = require('fs-extra');
 const sharp = require('sharp');
 const { flatten } = require('lodash');
-const BSON = require('bson-ext');
-const bson = new BSON([BSON.Binary, BSON.Code, BSON.DBRef, BSON.Decimal128, BSON.Double, BSON.Int32, BSON.Long, BSON.Map, BSON.MaxKey, BSON.MinKey, BSON.ObjectId, BSON.BSONRegExp, BSON.Symbol, BSON.Timestamp]);
+const msgpack = require('@msgpack/msgpack');
 const outputDir = process.env.DATA_DIR || path.join(__dirname, '..', 'data', 'emperors');
 
 function getEmpPath(emp) {
-    return path.join(outputDir, `${emp.id}.bson`);
+    return path.join(outputDir, `${emp.id}`);
 }
 
 async function getTextAndImageUrl(emp) {
@@ -61,7 +60,7 @@ module.exports = async () => {
     $('table[cellpadding="4"]').remove();
 
     const data = flatten(
-        $('.mw-parser-output h4').get().map((h4, index) => {
+        $('.mw-parser-output h4').get().slice(1, 2).map((h4, index) => {
             let house = $('.mw-headline', h4).text();
                             
             if  (house.indexOf(': ') !== -1) {
@@ -102,7 +101,7 @@ module.exports = async () => {
         
         await getTextAndImageUrl(emp);
         await getImage(emp);
-        const buf = await lzma.compress(bson.serialize(emp), 9);
+        const buf = await lzma.compress(msgpack.encode(emp), 9);
         await fs.ensureFile(getEmpPath(emp)+'.xz');
         await fs.writeFile(getEmpPath(emp)+'.xz', buf);
     } 

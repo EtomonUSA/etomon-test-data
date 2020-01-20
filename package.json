@@ -1,6 +1,6 @@
 {
   "name": "@dailynodemodule/emperor-data",
-  "version": "2.0.3",
+  "version": "2.0.4",
   "description": "Data on emperors of the Holy Roman Empire for use as sample data in other projects",
   "main": "src/index.js",
   "repository": {
@@ -33,8 +33,8 @@
     "README.md"
   ],
   "dependencies": {
-    "bson-ext": "^2.0.3",
-    "lzma-native": "^6.0.0",
-    "fs-extra": "^7.0.1"
+    "@msgpack/msgpack": "^1.11.0",
+    "fs-extra": "^7.0.1",
+    "lzma-native": "^6.0.0"
   }
 }

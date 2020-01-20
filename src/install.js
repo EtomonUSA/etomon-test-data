@@ -6,8 +6,8 @@ const dataDir = process.env.DATA_DIR || path.join(__dirname, '..', 'data');
 const empDir = path.join(dataDir, 'emperors');
 const statesDir = path.join(dataDir, 'states');
 
-const emperors = fs.pathExistsSync(empDir) ? fs.readdirSync(empDir).filter(f =>  f.indexOf('.bson.xz') !== -1).map(f => path.join(empDir, f)) : [];
-const states = fs.pathExistsSync(statesDir) ? fs.readdirSync(statesDir).filter(f => f.indexOf('.bson.xz') !== -1).map(f => path.join(statesDir, f)) : [];
+const emperors = fs.pathExistsSync(empDir) ? fs.readdirSync(empDir).filter(f =>  f.indexOf('.xz') !== -1).map(f => path.join(empDir, f)) : [];
+const states = fs.pathExistsSync(statesDir) ? fs.readdirSync(statesDir).filter(f => f.indexOf('.xz') !== -1).map(f => path.join(statesDir, f)) : [];
 
 async function main() {
     console.log(`decompressing emperor data...`);

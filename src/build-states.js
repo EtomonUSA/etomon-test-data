@@ -6,12 +6,11 @@ const lzma = require('lzma-native');
 const fs = require('fs-extra');
 const sharp = require('sharp');
 const { flatten } = require('lodash');
-const BSON = require('bson-ext');
-const bson = new BSON([BSON.Binary, BSON.Code, BSON.DBRef, BSON.Decimal128, BSON.Double, BSON.Int32, BSON.Long, BSON.Map, BSON.MaxKey, BSON.MinKey, BSON.ObjectId, BSON.BSONRegExp, BSON.Symbol, BSON.Timestamp]);
+const msgpack = require('@msgpack/msgpack');
 const outputDir = process.env.DATA_DIR || path.join(__dirname, '..', 'data', 'states');
 
 function getStatePath(state) {
-    return path.join(outputDir, `${state.id}.bson`);
+    return path.join(outputDir, `${state.id}`);
 }
 
 async function getStatePage(state) {
@@ -108,7 +107,7 @@ async function mainLoop(letter = 'A', states = []) {
                 await getStatePage(state);
                 await getStateImage(state);
 
-                const buf = await lzma.compress(bson.serialize(state), 9);
+                const buf = await lzma.compress(msgpack.encode(state), 9);
                 await fs.ensureFile(getStatePath(state)+'.xz');
                 await fs.writeFile(getStatePath(state)+'.xz', buf);
             } catch (e) {
