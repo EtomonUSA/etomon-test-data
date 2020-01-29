@@ -10,12 +10,12 @@ The content is licensed under the [Creative Commons Attribution-Share-Alike Lice
 
 # Building
 
-To build run `npm run build`. Output will be saved to the `data` folder. The output format is LZMA compressed BSON (e.g. .bson.xz) to save space when publishing to NPM.
+To build run `npm run build`. Output will be saved to the `data` folder. The output format is LZMA compressed MessagePack (e.g. .xz) to save space when publishing to NPM.
 
 # Installing
 
-Once built, you can decompress the BSON files with `npm run decompress`.
+Once built, you can decompress the MessagePack files with `npm run decompress`.
 
 # Using
 
-To access the data use `require('@dailynodemodule/emperor-data')`. The module exposes two Array-like objects `emperors` and `states`. The data and returned at runtime to avoid memory constraints.
+To access the data use `require('@dailynodemodule/emperor-data')`. The module exposes two Array-like objects `emperors` and `states`. The data and loaded at runtime to avoid memory constraints.
