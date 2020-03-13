@@ -51,7 +51,7 @@ async function getStateImage(state) {
     });
     
     image = await sharp(image)
-        .resize(300)
+        .resize({ height: 400 })
         .png()
         .toBuffer();
 

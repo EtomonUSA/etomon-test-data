@@ -44,7 +44,7 @@ async function getImage(emp) {
     });
 
     image = await sharp(image)
-        .resize(300)
+        .resize({ height: 400 })
         .png()
         .toBuffer();
 
