@@ -1,6 +1,6 @@
 {
   "name": "@dailynodemodule/emperor-data",
-  "version": "2.0.6",
+  "version": "3.0.0",
   "description": "Data on emperors of the Holy Roman Empire for use as sample data in other projects",
   "main": "src/index.js",
   "repository": {
@@ -9,32 +9,36 @@
   },
   "scripts": {
     "build": "node src/build.js",
-    "decompress": "node src/install.js",
-    "prepublishOnly": "npm run build",
-    "postinstall": "npm run decompress"
+    "prepublishOnly": "npm run build"
   },
-  "author": "Zachary Boyd <zachary@dailynodemodule.com>",
+  "contributors": [
+    {
+      "name": "Zachary R.T. Boyd",
+      "email": "zachary@zacharyboyd.nyc",
+      "url": "https://zacharyboyd.nyc"
+    },
+    {
+      "name": "Etomon Team",
+      "email": "open-source@etomon.com",
+      "url": "https://etomon.com"
+    }
+  ],
   "license": "CC0-1.0",
   "devDependencies": {
-    "cheerio": "^1.0.0-rc.3",
-    "xxhash": "^0.3.0",
-    "lodash": "^4.17.15",
-    "request": "^2.88.0",
-    "request-promise-native": "^1.0.7",
-    "sharp": "^0.23.4"
+    "@etomon/wiki-dummy-data": "^1.0.3"
   },
   "files": [
     "src/index.js",
     "src/install.js",
-    "data/emperors/*.xz",
-    "data/states/*.xz",
+    "data/*/*",
     "LICENSE.txt",
     ".gitignore",
     "README.md"
   ],
   "dependencies": {
-    "@msgpack/msgpack": "^1.11.0",
-    "fs-extra": "^7.0.1",
-    "lzma-native": "^6.0.0"
+    "@etomon/encode-tools": "^2.0.10",
+    "chance": "^1.1.7",
+    "fs-extra": "^10.0.0",
+    "lodash": "^4.17.21"
   }
 }

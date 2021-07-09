@@ -4,10 +4,10 @@ const msgpack = require('@msgpack/msgpack');
 const dataDir = process.env.DATA_DIR || path.join(__dirname, '..', 'data');
 const empDir = path.join(dataDir, 'emperors');
 const statesDir = path.join(dataDir, 'states');
-
-const emperors = fs.pathExistsSync(empDir) ? fs.readdirSync(empDir).filter(f =>  f.indexOf('.xz') === -1).map(f => path.join(empDir, f)) : [];
-const states = fs.pathExistsSync(statesDir) ? fs.readdirSync(statesDir).filter(f => f.indexOf('.xz') === -1).map(f => path.join(statesDir, f)) : [];
-
+const { EncodeTools  } = require('@etomon/encode-tools');
+const {  Record } = require('@etomon/wiki-dummy-data');
+const emperors = fs.pathExistsSync(empDir) ? fs.readdirSync(empDir).map(f => path.join(empDir, f)) : [];
+const states = fs.pathExistsSync(statesDir) ? fs.readdirSync(statesDir).map(f => path.join(statesDir, f)) : [];
 function createDataProxy(data) {
     const dataProxy = new Proxy(data, {
         set: () => false,
@@ -24,16 +24,17 @@ function createDataProxy(data) {
             if ((typeof(prop) !== 'number' && typeof(prop) !== 'string') && !Number.isInteger(Number(prop)))
                 return void(0);
 
-            return (() => {
-                let filePath = target[Number(prop)]; 
-                
-                if (!fs.existsSync(filePath))
+            return (async () => {
+                let filePath = target[Number(prop)];
+              // filePath = filePath && filePath.replace('.text', '');
+                if (!filePath || ! await fs.pathExists(`${filePath}`))
                     return void(0);
 
-                const file = fs.readFileSync(filePath);
-                const record = msgpack.decode(file);
-                
-                return record;
+                const buf = await fs.readFile(`${filePath}`);
+
+                const recordData = await Record.deserializeData(buf);
+
+                return recordData;
             })();
         }
     });
