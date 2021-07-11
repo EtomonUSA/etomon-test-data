@@ -25,7 +25,7 @@
   ],
   "license": "CC0-1.0",
   "devDependencies": {
-    "@etomon/wiki-dummy-data": "^1.0.3"
+    "@etomon/wiki-dummy-data": "^1.0.4"
   },
   "files": [
     "src/index.js",

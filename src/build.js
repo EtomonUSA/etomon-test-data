@@ -1,5 +1,5 @@
-const {WikiDummyDataCreator} = require('@etomon/wiki-dummy-data/src/index');
-const {DEFAULT_RECORD_OPTIONS} = require('@etomon/wiki-dummy-data/src/Record');
+const {WikiDummyDataCreator} = require('@etomon/wiki-dummy-data/lib/index');
+const {DEFAULT_RECORD_OPTIONS} = require('@etomon/wiki-dummy-data/lib/Record');
 const fs = require('fs-extra');
 const path =  require('path');
 const outpath = path.join(__dirname, '..', 'data', fs.readJsonSync(require('path').join(__dirname, '..', 'package.json')).version);
