@@ -23,6 +23,7 @@
   ],
   "devDependencies": {
     "@etomon/wiki-dummy-data": "^1.0.4",
+    "chance": "^1.1.7",
     "lodash": "^4.17.21"
   },
   "files": [
