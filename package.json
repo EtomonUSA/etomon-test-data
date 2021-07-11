@@ -1,11 +1,14 @@
 {
-  "name": "@dailynodemodule/emperor-data",
-  "version": "3.0.0",
-  "description": "Data on emperors of the Holy Roman Empire for use as sample data in other projects",
+  "name": "@etomon/etomon-test-data",
+  "version": "1.0.0",
+  "description": "Test data  for etomon projects",
   "main": "src/index.js",
   "repository": {
     "type": "git",
-    "url": "https://github.com/dailynodemodule/emperor-data"
+    "url": "https://bitbucket.org/etomon/etomon-test-data"
+  },
+  "publishConfig": {
+    "registry": "https://etomon-app-498742616314.d.codeartifact.us-east-1.amazonaws.com/npm/etomon-shared/"
   },
   "scripts": {
     "build": "node src/build.js",
@@ -13,19 +16,14 @@
   },
   "contributors": [
     {
-      "name": "Zachary R.T. Boyd",
-      "email": "zachary@zacharyboyd.nyc",
-      "url": "https://zacharyboyd.nyc"
-    },
-    {
       "name": "Etomon Team",
       "email": "open-source@etomon.com",
       "url": "https://etomon.com"
     }
   ],
-  "license": "CC0-1.0",
   "devDependencies": {
-    "@etomon/wiki-dummy-data": "^1.0.4"
+    "@etomon/wiki-dummy-data": "^1.0.4",
+    "lodash": "^4.17.21"
   },
   "files": [
     "src/index.js",
@@ -37,8 +35,6 @@
   ],
   "dependencies": {
     "@etomon/encode-tools": "^2.0.10",
-    "chance": "^1.1.7",
-    "fs-extra": "^10.0.0",
-    "lodash": "^4.17.21"
+    "fs-extra": "^10.0.0"
   }
 }

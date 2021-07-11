@@ -9,21 +9,22 @@ const chance = require('chance')();
 
 (async () => {
   for (let [ name, url, col ] of [
-
-    ['emperors', 'https://en.wikipedia.org/wiki/Frederick_I,_Holy_Roman_Emperor', 'Holy Roman Emperors'],
     ...[
-      ['https://en.wikipedia.org/wiki/Bavarian_Circle', 'Bavarian Circle (1500–1806) of the Holy Roman Empire'],
-      ['https://en.wikipedia.org/wiki/Franconian_Circle',' Franconian Circle (1500–1806) of the Holy Roman Empire'],
-      ['https://en.wikipedia.org/wiki/Lower_Rhenish%E2%80%93Westphalian_Circle', 'Lower Rhenish–Westphalian Circle (1500–1806) of the Holy Roman Empire'],
-      ['https://en.wikipedia.org/wiki/Lower_Saxon_Circle', 'Lower Saxon Circle (1500–1806) of the Holy Roman Empire'],
-      ['https://en.wikipedia.org/wiki/Swabian_Circle', 'Swabian Circle (1500–1806) of the Holy Roman Empire'],
-      ['https://en.wikipedia.org/wiki/Upper_Rhenish_Circle', 'Upper Rhenish Circle (1500–1806) of the Holy Roman Empire'],
-      ['https://en.wikipedia.org/wiki/Austrian_Circle', 'Austrian Circle of the Holy Roman Empire'],
-      ['https://en.wikipedia.org/wiki/Burgundian_Circle', 'Burgundian Circle (1512–1797) of the Holy Roman Empire'],
-      ['https://en.wikipedia.org/wiki/Electoral_Rhenish_Circle', 'Electoral Rhenish Circle (1512–1806) of the Holy Roman Empire'],
-      ['https://en.wikipedia.org/wiki/Upper_Saxon_Circle', 'Upper Saxon Circle (1512–1806) of the Holy Roman Empire']
-    ].map(([link, name]) => ['states', link, name])
+      ['https://en.wikipedia.org/wiki/List_of_current_Chinese_provincial_leaders', 'Provincial level government executives in China (list)'],
+      ['https://en.wikipedia.org/wiki/Grammy_Award_for_Best_New_Artist', 'Grammy Award for Best New Artist'],
+      ['https://en.wikipedia.org/wiki/Governor_General_of_Canada', 'Governors General of Canada'],
+      ['https://en.wikipedia.org/wiki/Enrique_Graue_Wiechers', 'Rectors of the Universidad Nacional (Autónoma) de México (UNAM respectively UNM)']
+    ].map(([link, name]) => ['people', link, name]),
+    ...[
+      ['https://en.wikipedia.org/wiki/List_of_cities_in_China', 'Metropolitan cities of China'],
+      // North America
+      ['https://en.wikipedia.org/wiki/Manhattan', 'New York metropolitan area'],
+      ['https://en.wikipedia.org/wiki/Mexico', 'World Heritage Sites in Mexico'],
+      ['https://en.wikipedia.org/wiki/Quebec', 'Provinces and territories of Canada']
+    ].map(([link, name]) => ['places', link, name])
   ]) {
+    console.log(name, url, col);
+
     let W = new WikiDummyDataCreator({
       ...DEFAULT_RECORD_OPTIONS,
       imageSize: {
@@ -38,6 +39,17 @@ const chance = require('chance')();
       name));
 
     for await (let record of collection) {
+      if (name === 'people' && record.data.coordinates) {
+
+        continue;
+      }
+
+      if (record.data.name && record.data.name.split) {
+        record.data.name = record.data.name.split('(').shift().trim();
+        record.data.title = record.data.title.split('(').shift().trim();
+      }
+
+
       let recPath = path.join(
         outpath,
         name,
