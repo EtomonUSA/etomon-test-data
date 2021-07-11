@@ -1,7 +1,7 @@
 const fs = require('fs-extra');
 const path = require('path');
 const msgpack = require('@msgpack/msgpack');
-const dataDir = process.env.DATA_DIR || path.join(__dirname, '..', 'data');
+const dataDir = path.join(__dirname, '..', 'data', fs.readJsonSync(require('path').join(__dirname, '..', 'package.json')).version);
 const empDir = path.join(dataDir, 'emperors');
 const statesDir = path.join(dataDir, 'states');
 const { EncodeTools  } = require('@etomon/encode-tools');

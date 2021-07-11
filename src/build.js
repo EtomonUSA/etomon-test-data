@@ -2,7 +2,7 @@ const {WikiDummyDataCreator} = require('@etomon/wiki-dummy-data/src/index');
 const {DEFAULT_RECORD_OPTIONS} = require('@etomon/wiki-dummy-data/src/Record');
 const fs = require('fs-extra');
 const path =  require('path');
-const outpath = path.join(__dirname, '..', 'data');
+const outpath = path.join(__dirname, '..', 'data', fs.readJsonSync(require('path').join(__dirname, '..', 'package.json')).version);
 const { EncodeTools } = require('@etomon/encode-tools');
 
 const chance = require('chance')();
