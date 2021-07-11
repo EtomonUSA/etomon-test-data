@@ -9,7 +9,7 @@ const {  Record } = require('@etomon/wiki-dummy-data');
 const emperors = fs.pathExistsSync(empDir) ? fs.readdirSync(empDir).map(f => path.join(empDir, f)) : [];
 const states = fs.pathExistsSync(statesDir) ? fs.readdirSync(statesDir).map(f => path.join(statesDir, f)) : [];
 function createDataProxy(data) {
-    const dataProxy = new Proxy(data, {3
+    const dataProxy = new Proxy(data, {
         set: () => false,
         deleteProperty: () => false,
         has: function (target, prop) {

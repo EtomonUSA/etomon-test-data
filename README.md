@@ -17,7 +17,7 @@ To build run `npm run build`. Output will be saved to the `data` folder. The out
 ```javascript
 (async () => {
   let Emp = require('@dailynodemodule/emperor-data');
-  let b = await Emp.states[0];
+  let b = await Emp.emperors[0];
   console.log(b);
 })();
 ```
