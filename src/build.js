@@ -11,18 +11,18 @@ const chance = require('chance')();
   for (let [ name, url, col ] of [
 
     ['emperors', 'https://en.wikipedia.org/wiki/Frederick_I,_Holy_Roman_Emperor', 'Holy Roman Emperors'],
-    // ...[
-    //   ['https://en.wikipedia.org/wiki/Bavarian_Circle', 'Bavarian Circle (1500–1806) of the Holy Roman Empire'],
-    //   ['https://en.wikipedia.org/wiki/Franconian_Circle',' Franconian Circle (1500–1806) of the Holy Roman Empire'],
-    //   ['https://en.wikipedia.org/wiki/Lower_Rhenish%E2%80%93Westphalian_Circle', 'Lower Rhenish–Westphalian Circle (1500–1806) of the Holy Roman Empire'],
-    //   ['https://en.wikipedia.org/wiki/Lower_Saxon_Circle', 'Lower Saxon Circle (1500–1806) of the Holy Roman Empire'],
-    //   ['https://en.wikipedia.org/wiki/Swabian_Circle', 'Swabian Circle (1500–1806) of the Holy Roman Empire'],
-    //   ['https://en.wikipedia.org/wiki/Upper_Rhenish_Circle', 'Upper Rhenish Circle (1500–1806) of the Holy Roman Empire'],
-    //   ['https://en.wikipedia.org/wiki/Austrian_Circle', 'Austrian Circle of the Holy Roman Empire'],
-    //   ['https://en.wikipedia.org/wiki/Burgundian_Circle', 'Burgundian Circle (1512–1797) of the Holy Roman Empire'],
-    //   ['https://en.wikipedia.org/wiki/Electoral_Rhenish_Circle', 'Electoral Rhenish Circle (1512–1806) of the Holy Roman Empire'],
-    //   ['https://en.wikipedia.org/wiki/Upper_Saxon_Circle', 'Upper Saxon Circle (1512–1806) of the Holy Roman Empire']
-    // ].map(([link, name]) => ['states', link, name])
+    ...[
+      ['https://en.wikipedia.org/wiki/Bavarian_Circle', 'Bavarian Circle (1500–1806) of the Holy Roman Empire'],
+      ['https://en.wikipedia.org/wiki/Franconian_Circle',' Franconian Circle (1500–1806) of the Holy Roman Empire'],
+      ['https://en.wikipedia.org/wiki/Lower_Rhenish%E2%80%93Westphalian_Circle', 'Lower Rhenish–Westphalian Circle (1500–1806) of the Holy Roman Empire'],
+      ['https://en.wikipedia.org/wiki/Lower_Saxon_Circle', 'Lower Saxon Circle (1500–1806) of the Holy Roman Empire'],
+      ['https://en.wikipedia.org/wiki/Swabian_Circle', 'Swabian Circle (1500–1806) of the Holy Roman Empire'],
+      ['https://en.wikipedia.org/wiki/Upper_Rhenish_Circle', 'Upper Rhenish Circle (1500–1806) of the Holy Roman Empire'],
+      ['https://en.wikipedia.org/wiki/Austrian_Circle', 'Austrian Circle of the Holy Roman Empire'],
+      ['https://en.wikipedia.org/wiki/Burgundian_Circle', 'Burgundian Circle (1512–1797) of the Holy Roman Empire'],
+      ['https://en.wikipedia.org/wiki/Electoral_Rhenish_Circle', 'Electoral Rhenish Circle (1512–1806) of the Holy Roman Empire'],
+      ['https://en.wikipedia.org/wiki/Upper_Saxon_Circle', 'Upper Saxon Circle (1512–1806) of the Holy Roman Empire']
+    ].map(([link, name]) => ['states', link, name])
   ]) {
     let W = new WikiDummyDataCreator({
       ...DEFAULT_RECORD_OPTIONS,
