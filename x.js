@@ -1,6 +1,6 @@
 (async () => {
   let Emp = require('./src/index');
-  let b = await Emp.states[0];
+  let b = await Emp.emperors[0];
   console.log(b);
 })();
 

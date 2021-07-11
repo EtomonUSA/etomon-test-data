@@ -12,10 +12,12 @@ The content is licensed under the [Creative Commons Attribution-Share-Alike Lice
 
 To build run `npm run build`. Output will be saved to the `data` folder. The output format is LZMA compressed MessagePack (e.g. .xz) to save space when publishing to NPM.
 
-# Installing
-
-Once built, you can decompress the MessagePack files with `npm run decompress`.
-
 # Using
 
-To access the data use `require('@dailynodemodule/emperor-data')`. The module exposes two Array-like objects `emperors` and `states`. The data and loaded at runtime to avoid memory constraints.
+```javascript
+(async () => {
+  let Emp = require('@dailynodemodule/emperor-data');
+  let b = await Emp.states[0];
+  console.log(b);
+})();
+```
