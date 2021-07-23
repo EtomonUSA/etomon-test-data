@@ -1,14 +1,15 @@
 {
   "name": "@etomon/etomon-test-data",
-  "version": "1.0.0",
-  "description": "Test data  for etomon projects",
+  "version": "1.1.0",
+  "description": "Test data for Etomon projects",
   "main": "src/index.js",
   "repository": {
     "type": "git",
-    "url": "https://bitbucket.org/etomon/etomon-test-data"
+    "url": "https://github.com/EtomonUSA/etomon-test-data"
   },
   "publishConfig": {
-    "registry": "https://etomon-app-498742616314.d.codeartifact.us-east-1.amazonaws.com/npm/etomon-shared/"
+    "registry": "https://registry.npmjs.org",
+    "access": "public"
   },
   "scripts": {
     "build": "node src/build.js",
@@ -21,8 +22,8 @@
       "url": "https://etomon.com"
     }
   ],
+  "license": "CC0-1.0",
   "devDependencies": {
-    "@etomon/wiki-dummy-data": "^1.0.4",
     "chance": "^1.1.7",
     "lodash": "^4.17.21"
   },
@@ -35,7 +36,8 @@
     "README.md"
   ],
   "dependencies": {
-    "@etomon/encode-tools": "^2.0.10",
+    "@etomon/encode-tools": "^2.3.2",
+    "@etomon/wiki-dummy-data": "^1.0.4",
     "fs-extra": "^10.0.0"
   }
 }
